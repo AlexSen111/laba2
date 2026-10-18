@@ -1,3 +1,5 @@
+# from parsers import parse_csv
+# from models import validation_mode_skip_invalid
 def calculate_events(parsed_csv: list) -> list:
     """Функция, получающая на вход отпарсенный csv-файл и обраюатывающая его для дальнейшего формирования json-отчёта
 
@@ -22,20 +24,21 @@ def calculate_events(parsed_csv: list) -> list:
             for source in sources
         }
     ][0]
+    top5_errors: dict = dict(sorted(error_counts.items(), key=lambda x: x[1], reverse=True)[:5])
     min_time: list = min([i for i in parsed_csv])
     max_time: list = max([i for i in parsed_csv])
-    output: list = [
-        events_count,
-        debug_count,
-        info_count,
-        warning_count,
-        error_count,
-        critical_count,
-        source_counts,
-        error_counts,
-        min_time,
-        max_time,
-    ]
+    output: dict = {
+        "Number of events": events_count,
+        "Number of debug events": debug_count,
+        "Number of info events": info_count,
+        "Number of warnings": warning_count,
+        "Number of errors": error_count,
+        "Number of critical errors": critical_count,
+        "Sources": source_counts,
+        "Top 5 error sources": top5_errors,
+        "First timestamp": min_time,
+        "Last timestamp": max_time,
+    }
     return output
 
 

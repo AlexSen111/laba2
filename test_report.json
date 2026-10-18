@@ -1,0 +1,36 @@
+{
+    "Number of events": 30,
+    "Number of debug events": 3,
+    "Number of info events": 5,
+    "Number of warnings": 3,
+    "Number of errors": 11,
+    "Number of critical errors": 8,
+    "Sources": {
+        "api-gateway": 9,
+        "database": 9,
+        "sensor-01": 5,
+        "sensor-02": 3,
+        "sensor-03": 3,
+        "sensor-04": 1
+    },
+    "Top 5 error sources": {
+        "database": 7,
+        "api-gateway": 5,
+        "sensor-03": 3,
+        "sensor-01": 2,
+        "sensor-02": 1
+    },
+    "First timestamp": [
+        "2024-01-15T08:00:01Z",
+        "DEBUG",
+        "sensor-01",
+        "Инициализация датчика завершена"
+    ],
+    "Last timestamp": [
+        "2024-01-15T08:20:52Z",
+        "ERROR",
+        "database",
+        "Нарушение внешнего ключа при удалении записи"
+    ],
+    "WARNING: number of skipped strings": 4
+}
