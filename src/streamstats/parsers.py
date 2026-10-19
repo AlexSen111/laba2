@@ -2,15 +2,15 @@ import csv
 import json
 
 
-def parse_csv(path: str) -> dict:
+def parse_csv(path: str) -> list[dict]:
     # csv_output = []
-    """Функция, которая принимает на вход строку csv-файла и разбивает её на отдельные поля
+    """Функция, которая принимает на вход путь к csv-файлу и преобразует её в список словарей
 
     Args:
-        input_file (str): входная строка csv-файла
+        path (str): путь к файлу
 
     Returns:
-        list: отдельные поля, записаннные в список
+        list[dict]: список событий
     """
     with open(path, encoding="utf-8") as f:
         output = list(csv.DictReader(f))
@@ -22,8 +22,16 @@ def parse_csv(path: str) -> dict:
     return output
 
 
-def parse_jsonl(path: str) -> list:
-    jsonl_output = []
+def parse_jsonl(path: str) -> list[dict]:
+    """Функция, принимающая на вход путь к jsonl файлу и превращающая его в список словарей
+
+    Args:
+        path (str): путь к файлу
+
+    Returns:
+        list[dict]: список событий
+    """
+    jsonl_output: dict = []
     with open(path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()

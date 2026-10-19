@@ -1,32 +1,34 @@
 # from parsers import parse_csv
 # from models import validation_mode_skip_invalid
-def calculate_events(parsed_csv: list[dict]) -> dict:
-    """Функция, получающая на вход отпарсенный csv-файл и обраюатывающая его для дальнейшего формирования json-отчёта
+def calculate_events(parsed_file: list[dict]) -> dict:
+    """Функция, получающая на вход отпарсенный файл и обраюатывающая его для дальнейшего формирования json-отчёта
 
     Args:
-        parsed_csv (list): Отпарсенный csv-файл
+        parsed_file (list[dict]): Отпарсенный файл
 
     Returns:
-        list: Список, содержащий данные для дальнейшего формирования json-отчёта
+        dict: Готовые строки для отчёта
     """
-    parsed_csv: list = [list(event.values()) for event in parsed_csv]  # избавляемся от заголовка
-    events_count: int = len(parsed_csv)
-    debug_count: int = len([i for i in parsed_csv if i[1] == "DEBUG"])
-    info_count: int = len([i for i in parsed_csv if i[1] == "INFO"])
-    warning_count: int = len([i for i in parsed_csv if i[1] == "WARNING"])
-    error_count: int = len([i for i in parsed_csv if i[1] == "ERROR"])
-    critical_count: int = len([i for i in parsed_csv if i[1] == "CRITICAL"])
-    sources: list = sorted(list(set([i[2] for i in parsed_csv])))
-    source_counts: dict = [{source: len([i for i in parsed_csv if i[2] == source]) for source in sources}][0]
+    parsed_file: list = [list(event.values()) for event in parsed_file]  # избавляемся от заголовка
+    events_count: int = len(parsed_file)
+    debug_count: int = len([line for line in parsed_file if line[1] == "DEBUG"])
+    info_count: int = len([line for line in parsed_file if line[1] == "INFO"])
+    warning_count: int = len([line for line in parsed_file if line[1] == "WARNING"])
+    error_count: int = len([line for line in parsed_file if line[1] == "ERROR"])
+    critical_count: int = len([line for line in parsed_file if line[1] == "CRITICAL"])
+    sources: list = sorted(list(set([line[2] for line in parsed_file])))
+    source_counts: dict = [{source: len([line for line in parsed_file if line[2] == source]) for source in sources}][0]
     error_counts: dict = [
         {
-            source: len([i for i in parsed_csv if i[2] == source and (i[1] == "ERROR" or i[1] == "CRITICAL")])
+            source: len(
+                [line for line in parsed_file if line[2] == source and (line[1] == "ERROR" or line[1] == "CRITICAL")]
+            )
             for source in sources
         }
     ][0]
     top5_errors: dict = dict(sorted(error_counts.items(), key=lambda x: x[1], reverse=True)[:5])
-    min_time: list = min([i for i in parsed_csv])
-    max_time: list = max([i for i in parsed_csv])
+    min_time: list = min([line for line in parsed_file])
+    max_time: list = max([line for line in parsed_file])
     output: dict = {
         "Number of events": events_count,
         "Number of debug events": debug_count,

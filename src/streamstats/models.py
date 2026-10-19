@@ -7,7 +7,15 @@ from .errors import WrongLevelError
 from .errors import WrongTimeError
 
 
-def correct_timestamp(time: str):
+def correct_timestamp(time: str) -> bool:
+    """Функция, проверяющая временную метку на соответствие стандарту
+
+    Args:
+        time (str): временная метка
+
+    Returns:
+        bool: соответствие стандарту
+    """
     try:
         datetime.fromisoformat(time)
         return True
@@ -16,11 +24,22 @@ def correct_timestamp(time: str):
 
 
 def validation(parsed_file: list[dict]):
-    events_count = 0
-    correct_level = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    """Функция, проверяющая валидность входных данных
+
+    Args:
+        parsed_file (list[dict]): отпарсенный файл
+
+    Raises:
+        WrongTimeError: неправильная временная метка
+        WrongLevelError: неправильный уровень
+        EmptySourceError: пустой источник
+        WrongEventError: нехватка поля
+    """
+    events_count: int = 0
+    correct_level: list = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
     for line in parsed_file:
-        event = list(line.values())
-        event = [i for i in event if i is not None]
+        event: list = list(line.values())
+        event: list = [i for i in event if i is not None]
         events_count += 1
         if correct_timestamp(event[0]) and event[1] in correct_level and len(event[2]) > 0 and len(event) == 4:
             continue
@@ -34,9 +53,6 @@ def validation(parsed_file: list[dict]):
             raise WrongEventError(
                 f"Ошибка: в строке {events_count} событие состоит из {len(event)} полей, а должно состоять из 4"
             )
-
-    # надо написать так, чтобы для каждой строки csv-файла валидация была отдельной, либо обрабатывать построчно
-    # pass
 
 
 def validation_mode_skip_invalid(parsed_file: list[dict]):
