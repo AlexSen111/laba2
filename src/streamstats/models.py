@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from errors import EmptySourceError
-from errors import WrongEventError
-from errors import WrongLevelError
-from errors import WrongTimeError
+# from .parsers import parse_csv
+from .errors import EmptySourceError
+from .errors import WrongEventError
+from .errors import WrongLevelError
+from .errors import WrongTimeError
 
 
 def correct_timestamp(time: str):
@@ -14,10 +15,12 @@ def correct_timestamp(time: str):
         return False
 
 
-def validation(parsed_csv: list):
+def validation(parsed_file: list[dict]):
     events_count = 0
     correct_level = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    for event in parsed_csv[1:]:
+    for line in parsed_file:
+        event = list(line.values())
+        event = [i for i in event if i is not None]
         events_count += 1
         if correct_timestamp(event[0]) and event[1] in correct_level and len(event[2]) > 0 and len(event) == 4:
             continue
@@ -36,29 +39,40 @@ def validation(parsed_csv: list):
     # pass
 
 
-def validation_mode_skip_invalid(parsed_csv: list):
+def validation_mode_skip_invalid(parsed_file: list[dict]):
+    output = []
+    # parsed_file = [list(i.values()) for i in parsed_file]
     skipped_count = 0
     correct_level = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    for event in parsed_csv[1:]:
+    for line in parsed_file:
+        # print(line)
+        event = list(line.values())
+        event = [i for i in event if i is not None]
+        # print(event)
         if correct_timestamp(event[0]) and event[1] in correct_level and len(event[2]) > 0 and len(event) == 4:
-            continue
-        elif not correct_timestamp(event[0]):
-            parsed_csv.remove(event)
+            output.append(line)
+        if len(event[2]) == 0:
+            # print(True, event)
+            # parsed_file.remove(event)
             skipped_count += 1
-        elif event[1] not in correct_level:
-            parsed_csv.remove(event)
+        if len(event) != 4:
+            # print(True, event)
+            # parsed_file.remove(event)
             skipped_count += 1
-        elif len(event[2]) == 0:
-            parsed_csv.remove(event)
+        if not correct_timestamp(event[0]):
+            # print(True, event)
+            # parsed_file.remove(event)
             skipped_count += 1
-        elif len(event) != 4:
-            parsed_csv.remove(event)
+        if event[1] not in correct_level:
+            # print(True, event)
+            # parsed_file.remove(event)
             skipped_count += 1
-    return parsed_csv, skipped_count
+    return output, skipped_count
 
 
-"""a = parse_csv(r"src\streamstats\test_input.csv")
-for i in a:
-    print(i)
-print(validation(a))
-print(validation_mode_skip_invalid(a)[1])"""
+# a = parse_csv(r"src\streamstats\test_input.csv")
+"""for i in a:
+    print(i)"""
+# print(validation(a))
+# print(a)
+# print(validation_mode_skip_invalid(a))

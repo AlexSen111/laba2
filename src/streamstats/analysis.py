@@ -1,6 +1,6 @@
 # from parsers import parse_csv
 # from models import validation_mode_skip_invalid
-def calculate_events(parsed_csv: list) -> list:
+def calculate_events(parsed_csv: list[dict]) -> dict:
     """Функция, получающая на вход отпарсенный csv-файл и обраюатывающая его для дальнейшего формирования json-отчёта
 
     Args:
@@ -9,7 +9,7 @@ def calculate_events(parsed_csv: list) -> list:
     Returns:
         list: Список, содержащий данные для дальнейшего формирования json-отчёта
     """
-    parsed_csv: list = parsed_csv[1:]  # избавляемся от заголовка
+    parsed_csv: list = [list(event.values()) for event in parsed_csv]  # избавляемся от заголовка
     events_count: int = len(parsed_csv)
     debug_count: int = len([i for i in parsed_csv if i[1] == "DEBUG"])
     info_count: int = len([i for i in parsed_csv if i[1] == "INFO"])

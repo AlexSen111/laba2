@@ -1,0 +1,31 @@
+{"timestamp": "2024-01-15T08:00:01Z", "level": "DEBUG", "source": "sensor-01", "message": "Инициализация датчика завершена"}
+{"timestamp": "2024-01-15T08:00:15Z", "level": "INFO", "source": "sensor-01", "message": "Первое измерение получено"}
+{"timestamp": "2024-01-15T08:01:03Z", "level": "INFO", "source": "api-gateway", "message": "Входящий запрос от клиента 192.168.1.10"}
+{"timestamp": "2024-01-15T08:02:47Z", "level": "WARNING", "source": "sensor-02", "message": "Температура приближается к верхней границе"}
+{"timestamp": "2024-01-15T08:03:12Z", "level": "ERROR", "source": "database", "message": "Не удалось установить соединение с репликой"}
+{"timestamp": "2024-01-15T08:03:45Z", "level": "CRITICAL", "source": "database", "message": "Основной узел БД недоступен"}
+{"timestamp": "2024-01-15T08:04:20Z", "level": "INFO", "source": "api-gateway", "message": "Запрос обработан за 245 мс"}
+{"timestamp": "2024-01-15T08:05:00Z", "level": "DEBUG", "source": "sensor-01", "message": "Калибровка завершена"}
+{"timestamp": "2024-01-15T08:06:33Z", "level": "WARNING", "source": "api-gateway", "message": "Превышен лимит запросов для клиента 192.168.1.10"}
+{"timestamp": "2024-01-15T08:07:18Z", "level": "ERROR", "source": "sensor-03", "message": "Ошибка чтения данных: таймаут"}
+{"timestamp": "2024-01-15T08:08:02Z", "level": "INFO", "source": "sensor-02", "message": "Данные успешно отправлены на сервер"}
+{"timestamp": "2024-01-15T08:09:55Z", "level": "DEBUG", "source": "api-gateway", "message": "Заголовки запроса: Content-Type=application/json"}
+{"timestamp": "2024-01-15T08:10:30Z", "level": "CRITICAL", "source": "sensor-03", "message": "Датчик вышел из строя"}
+{"timestamp": "2024-01-15T08:11:11Z", "level": "INFO", "source": "database", "message": "Создана резервная копия"}
+{"timestamp": "2024-01-15T08:12:40Z", "level": "WARNING", "source": "database", "message": "Медленный запрос: 3.2 секунды"}
+{"timestamp": "2024-01-15T08:13:10Z", "level": "ERROR", "source": "api-gateway", "message": "Не удалось аутентифицировать клиента: неверный токен"}
+{"timestamp": "2024-01-15T08:13:42Z", "level": "ERROR", "source": "database", "message": "Дубликат ключа при вставке записи id=10245"}
+{"timestamp": "2024-01-15T08:14:05Z", "level": "CRITICAL", "source": "api-gateway", "message": "Пул соединений исчерпан, новые запросы отклоняются"}
+{"timestamp": "2024-01-15T08:14:33Z", "level": "ERROR", "source": "sensor-01", "message": "Датчик вернул NaN вместо значения температуры"}
+{"timestamp": "2024-01-15T08:15:00Z", "level": "CRITICAL", "source": "database", "message": "Обнаружено повреждение индекса таблицы events"}
+{"timestamp": "2024-01-15T08:15:27Z", "level": "ERROR", "source": "sensor-02", "message": "Ошибка отправки данных: HTTP 502 Bad Gateway"}
+{"timestamp": "2024-01-15T08:16:01Z", "level": "ERROR", "source": "api-gateway", "message": "Таймаут при обращении к downstream-сервису"}
+{"timestamp": "2024-01-15T08:16:44Z", "level": "CRITICAL", "source": "sensor-04", "message": "Датчик не отвечает более 5 минут"}
+{"timestamp": "2024-01-15T08:17:12Z", "level": "ERROR", "source": "database", "message": "Медленный запрос 12.7 сек превысил порог 10 сек"}
+{"timestamp": "2024-01-15T08:17:50Z", "level": "CRITICAL", "source": "api-gateway", "message": "Сервис переведён в режим деградации"}
+{"timestamp": "2024-01-15T08:18:21Z", "level": "ERROR", "source": "sensor-03", "message": "Ошибка калибровки: контрольная сумма не совпала"}
+{"timestamp": "2024-01-15T08:19:03Z", "level": "CRITICAL", "source": "database", "message": "Кластер БД потерял кворум"}
+{"timestamp": "2024-01-15T08:19:37Z", "level": "ERROR", "source": "api-gateway", "message": "Превышено максимальное число ретраев для запроса"}
+{"timestamp": "2024-01-15T08:20:15Z", "level": "CRITICAL", "source": "sensor-01", "message": "Зафиксировано возгорание в корпусе датчика"}
+{"timestamp": "2024-01-15T08:20:52Z", "level": "ERROR", "source": "database", "message": "Нарушение внешнего ключа при удалении записи"}
+{"timestamp": "2024-13-15T08:20:52Z", "level": "ERROR", "source": "database", "message": "Нарушение внешнего ключа при удалении записи"}
